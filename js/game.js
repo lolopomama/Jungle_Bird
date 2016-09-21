@@ -1,4 +1,4 @@
-var game = new Phaser.Game(350, 540, Phaser.AUTO, 'gameDiv');
+var game = new Phaser.Game(360, 640, Phaser.AUTO, 'gameDiv');
 
 //define global var
 
@@ -14,6 +14,6 @@ game.state.add('menu', menuState);
 game.state.add('play', playState);
 
 
-//start 'booth state
+//start 'boot state
 
 game.state.start('boot');
