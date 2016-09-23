@@ -18,7 +18,7 @@ var loadState = {
     game.load.image('skyfield2', 'assets/wall2.jpg');
     game.load.image('skyfield3', 'assets/wall3.png');
     game.load.image('skyfield4', 'assets/wall4.jpg');
-
+    game.load.image('player', 'assets/player.png');
     
         
     game.load.audio('bgSong', [ 'assets/music.mp3']);
