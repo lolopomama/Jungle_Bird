@@ -18,6 +18,18 @@ var menuState = {
         
         
         
+        //Letting game start
+        var leftKey = game.input.keyboard.addKey(Phaser.Keyboard.LEFT);
+        leftKey.onDown.add(this.start, this);
+        
+        var rightKey = game.input.keyboard.addKey(Phaser.Keyboard.RIGHT);
+        rightKey.onDown.add(this.start, this);
+        
+        
     },
+    
+    start: function() {
+        game.state.start('play');
+    }
         
 }
