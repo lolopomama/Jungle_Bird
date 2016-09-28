@@ -44,6 +44,9 @@ var playState = {
         this.wall1 = game.add.sprite(-10,0, 'wall');
         this.wall1.scale.setTo(1,2);
         
+        
+        this.wall2 = game.add.sprite( 350, 0, 'wall');
+        this.wall2.scale.setTo(1,2);
         },
     
         
