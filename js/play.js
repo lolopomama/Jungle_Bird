@@ -12,7 +12,7 @@ var playState = {
         this.player.anchor.setTo(0.5, 0.5);
 
         game.physics.arcade.enable(this.player);
-        this.player.body.gravity.y = 400;
+        this.player.body.gravity.y = 200;
         
         //Created the Wall
         
@@ -25,13 +25,32 @@ var playState = {
         game.physics.arcade.enable(rightWall);
         rightWall.body.immovable = true;
         
-        
-        
+
         this.cursor = game.input.keyboard.createCursorKeys();
-    },
+        
+        // Display the score
+        this.scoreLabel = game.add.text(30, 30, 'score: 0',{ font: '18px Arial', fill: '#ffffff' });
+        
+        // Initialize the score variable
+        this.score = 0;
+        
+        this.ground = game.add.sprite(0, 515 ,'ground');
+        this.ground.scale.setTo(2, 1);
+        this.ground.anchor.setTo(0, 0);
+        game.physics.arcade.enable(this.ground);
+        this.ground.body.immovable = true;
+        this.ground.alpha = 0;
+        
+        this.wall1 = game.add.sprite(-10,0, 'wall');
+        this.wall1.scale.setTo(1,2);
+        
+        },
+    
+        
     
     
     update: function(){
+        game.physics.arcade.collide(this.player, this.ground);
         this.moveBackground();
         this.movePlayer();
         
