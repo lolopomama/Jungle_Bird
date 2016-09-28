@@ -21,9 +21,12 @@ var loadState = {
     game.load.spritesheet('player', 'assets/player2.png', 40 ,40 );
     game.load.image('ground', 'assets/wallHorizontal.png');
     game.load.image('wall', 'assets/wallVertical.png');
-    game.load.image('alphabet', 'assets/alphabet.png');
+    game.load.spritesheet('alphabet', 'assets/alphabet.png', 30,30);
 
     game.load.audio('bgSong', [ 'assets/music.mp3']);
+    game.load.audio('dieSound', ['assets/die.wav']);
+    game.load.audio('coinSound', ['assets/coin.wav']);
+    game.load.audio('jumpSound', ['assets/jump.wav']);
 
 
     //Tile MAP resource

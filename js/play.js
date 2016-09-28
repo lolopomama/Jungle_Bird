@@ -5,7 +5,13 @@ var playState = {
         //Add background
         tilesprite = game.add.tileSprite(0, 0, 360, 640, 'skyfield1');
         
-       
+        this.music = game.add.audio('bgSong');
+        this.music.loop = true;
+        this.music.play();
+        
+        this.dieSound = game.add.audio('dieSound');
+        this.coinSound = game.add.audio('coinSound');
+        this.jumpSound = game.add.audio('jumpSound');
         //Add player
         
         this.player = game.add.sprite(game.width/2, game.height/2 ,'player');
@@ -16,6 +22,8 @@ var playState = {
         
         game.physics.arcade.enable(this.player);
         this.player.body.gravity.y = 400;
+        
+        
         
         //Created the Wall
         
@@ -28,11 +36,16 @@ var playState = {
         game.physics.arcade.enable(rightWall);
         rightWall.body.immovable = true;
         
-
         this.cursor = game.input.keyboard.createCursorKeys();
         
         // Display the score
         this.scoreLabel = game.add.text(30, 30, 'score: 0',{ font: '18px Arial', fill: '#ffffff' });
+        
+        //Add Alphabet
+        this.alphabet = game.add.group();
+        this.alphabet.enableBody = true;
+        this.alphabet.createMultiple(10, 'alphabet');
+        game.time.events.loop(2200, this.addAlphabet, this);
         
         // Initialize the score variable
         this.score = 0;
@@ -72,6 +85,8 @@ var playState = {
     },
     
     playerDie: function() {
+            this.music.stop();
+            this.dieSound.play();
             game.state.start('menu');
         
     },
@@ -110,7 +125,26 @@ var playState = {
 			if (this.cursor.up.isDown && this.player.body.touching.down){
 				this.player.body.velocity.y = -320;
                 this.player.animations.play('top');
+                this.jumpSound.play();
                 
 			}
-    },
+        },
+        
+    addAlphabet: function() {
+            // Get the first dead enemy of the group
+            var alp = this.alphabet.getFirstDead();
+            // If there isn't any dead enemy, do nothing
+            if (!alp) {
+                return;
+            }
+        // Initialize the enemy
+            alp.anchor.setTo(0.5, 1);
+            alp.reset(game.width/2, 0);
+            alp.body.gravity.y = 500;
+            alp.body.velocity.x = 100 * game.rnd.pick([-1, 1]);
+            alp.body.bounce.x = 1;
+            alp.checkWorldBounds = true;
+            alp.outOfBoundsKill = true;
+        },
+    
 }
