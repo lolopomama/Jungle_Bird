@@ -10,9 +10,12 @@ var playState = {
         
         this.player = game.add.sprite(game.width/2, game.height/2 ,'player');
         this.player.anchor.setTo(0.5, 0.5);
-
+        this.player.animations.add('right', [3], 8, true );
+        this.player.animations.add('left', [0], 8 ,true);
+        this.player.animations.add('top',[2], 8 ,true);
+        
         game.physics.arcade.enable(this.player);
-        this.player.body.gravity.y = 200;
+        this.player.body.gravity.y = 400;
         
         //Created the Wall
         
@@ -43,10 +46,15 @@ var playState = {
         
         this.wall1 = game.add.sprite(-10,0, 'wall');
         this.wall1.scale.setTo(1,2);
-        
+        game.physics.arcade.enable(this.wall1);
+        this.wall1.body.immovable = true;
+        this.wall1.alpha = 0.5;
         
         this.wall2 = game.add.sprite( 350, 0, 'wall');
         this.wall2.scale.setTo(1,2);
+        game.physics.arcade.enable(this.wall2);
+        this.wall2.body.immovable = true;
+        this.wall2.alpha = 0.5;
         },
     
         
@@ -101,6 +109,8 @@ var playState = {
 
 			if (this.cursor.up.isDown && this.player.body.touching.down){
 				this.player.body.velocity.y = -320;
+                this.player.animations.play('top');
+                
 			}
     },
 }
