@@ -24,18 +24,6 @@ var playState = {
         this.player.body.gravity.y = 400;
         
         
-        
-        //Created the Wall
-        
-        var leftWall = game.add.sprite(0, 0);
-        var rightWall = game.add.sprite(360, 0);
-        
-        game.physics.arcade.enable(leftWall);
-        leftWall.body.immovable = true;
-        
-        game.physics.arcade.enable(rightWall);
-        rightWall.body.immovable = true;
-        
         this.cursor = game.input.keyboard.createCursorKeys();
         
         // Display the score
@@ -68,10 +56,14 @@ var playState = {
         game.physics.arcade.enable(this.wall2);
         this.wall2.body.immovable = true;
         this.wall2.alpha = 0.5;
+        
+        game.physics.arcade.collide(this.player, this.wall1, this.wall2);
+        
+        
         },
     
         
-    
+  
     
     update: function(){
         game.physics.arcade.collide(this.player, this.ground);
@@ -87,6 +79,8 @@ var playState = {
     playerDie: function() {
             this.music.stop();
             this.dieSound.play();
+
+        
             game.state.start('menu');
         
     },
