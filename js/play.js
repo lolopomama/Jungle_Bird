@@ -14,7 +14,7 @@ var playState = {
         this.jumpSound = game.add.audio('jumpSound');
         //Add player
         
-        this.player = game.add.sprite(game.width/2, game.height/2 ,'player');
+        this.player = game.add.sprite(game.width/2, 320 ,'player');
         this.player.anchor.setTo(0.5, 0.5);
         this.player.animations.add('right', [3], 8, true );
         this.player.animations.add('left', [0], 8 ,true);
@@ -64,12 +64,12 @@ var playState = {
         console.log(randomAlp2);
         console.log(randomAlp3);
         
-        this['char'+randomAlp1].body.gravity.y = 50 + (Math.random() *200);
-        this['char'+randomAlp2].body.gravity.y = 50 + (Math.random() *200);
-        this['char'+randomAlp3].body.gravity.y = 50 + (Math.random() *200);
+        this['char'+randomAlp1].body.gravity.y = 50 + (Math.random() *80);
+        this['char'+randomAlp2].body.gravity.y = 50 + (Math.random() *80);
+        this['char'+randomAlp3].body.gravity.y = 50 + (Math.random() *80);
         
         
-        game.physics.arcade.collide(this.ground, this.alphabet);
+        
         
         
         
@@ -77,28 +77,28 @@ var playState = {
         // Initialize the score variable
         this.score = 0;
         
-        this.ground = game.add.sprite(0, 300 ,'ground');
+        this.ground = game.add.sprite(0, 360 ,'ground');
         this.ground.scale.setTo(4, 1);
         this.ground.anchor.setTo(0, 0);
         game.physics.arcade.enable(this.ground);
         this.ground.body.immovable = true;
         this.ground.alpha = 0;
         
-        this.wall1 = game.add.sprite(-10,0, 'wall');
+        this.wall1 = game.add.sprite(-20,0, 'wall');
         this.wall1.scale.setTo(1,2);
         game.physics.arcade.enable(this.wall1);
         this.wall1.body.immovable = true;
         this.wall1.alpha = 0.5;
         
-        this.wall2 = game.add.sprite( 790 , 0, 'wall');
+        this.wall2 = game.add.sprite( 800 , 0, 'wall');
         this.wall2.scale.setTo(1,2);
         game.physics.arcade.enable(this.wall2);
         this.wall2.body.immovable = true;
         this.wall2.alpha = 0.5;
         
-        game.physics.arcade.collide(this.player, this.wall1, this.wall2);
         
-//        this.a = game.add.
+        
+
         
         
         },
@@ -108,7 +108,10 @@ var playState = {
     
     update: function(){
         game.physics.arcade.collide(this.player, this.ground);
-        this.moveBackground();
+        game.physics.arcade.collide(this.player, this.wall1);
+        game.physics.arcade.collide(this.player, this.wall2);
+//      game.physics.arcade.collide(this.ground, this.alphabet);
+//        this.moveBackground();
         this.movePlayer();
         
         if(!this.player.inWorld){
@@ -126,28 +129,28 @@ var playState = {
         
     },
     
-    moveBackground: function(){
-              if (this.cursor.left.isDown)    {
-            tilesprite.tilePosition.x += 1;
-            }
-
-            else if (this.cursor.right.isDown) {
-            tilesprite.tilePosition.x -= 1;
-            }
-        
-        
-    },
+//    moveBackground: function(){
+//              if (this.cursor.left.isDown)    {
+//            tilesprite.tilePosition.x += 1;
+//            }
+//
+//            else if (this.cursor.right.isDown) {
+//            tilesprite.tilePosition.x -= 1;
+//            }
+//        
+//        
+//    },
     
     
     movePlayer: function() {
 
 			if (this.cursor.left.isDown) {
-				this.player.body.velocity.x = -200;
+				this.player.body.velocity.x = -300;
                 this.player.animations.play('left'); //Left animation
 			}
 
 			else if (this.cursor.right.isDown) {
-				this.player.body.velocity.x = 200;
+				this.player.body.velocity.x = 300;
                 this.player.animations.play('right'); //Right animation
 			}
 
