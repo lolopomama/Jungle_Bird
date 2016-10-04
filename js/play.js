@@ -39,38 +39,47 @@ var playState = {
         this.alphabet = game.add.group();
         var myFrame = 30;
         for(var i=0; i<26;i++){
-            this['char'+i] = game.add.sprite(i*myFrame,-30, 'alphabet', i, this.alphabet);  
-            game.physics.arcade.enable(this['char'+i]);
+            game.global['char'+i] = game.add.sprite(i*myFrame,-30, 'alphabet', i, this.alphabet);  
+            game.physics.arcade.enable(game.global['char'+i]);
+            game.global['char'+i].name = i;
 //            this['char'+i].body.gravity.y = 100 + (Math.random() *500);
 //            this['char'+i].body.velocity.x = 100 * game.rnd.pick([-1, 1]);
         }
         this.alphabet.enableBody = true;
         
         
+        
         var randomAlp1 = Math.floor(0 + (Math.random() *26));
         var randomAlp2 = Math.floor(0 + (Math.random() *26));
         var randomAlp3 = Math.floor(0 + (Math.random() *26));
+        var randomAlp4 = Math.floor(0 + (Math.random() *26));
         
-        while(randomAlp1 == randomAlp2 || randomAlp1 == randomAlp3 || randomAlp2 == randomAlp3){
+        
+        
+        while(randomAlp1 == randomAlp2 || randomAlp1 == randomAlp3 || randomAlp2 == randomAlp3 ||randomAlp4 == randomAlp1 || randomAlp4 == randomAlp2  || randomAlp4 == randomAlp3 ){
             if(randomAlp1 == randomAlp2) {
                 randomAlp1 = Math.floor(0 + (Math.random() *26));
             }else if(randomAlp1 == randomAlp3) {
                 randomAlp1 = Math.floor(0 + (Math.random() *26));
             }else if(randomAlp2 == randomAlp3) {
                 randomAlp2 = Math.floor(0 + (Math.random() *26));
+            }else if(randomAlp4 == randomAlp1){
+                randomAlp4 = Math.floor(0 + (Math.random() *26));
+            }else if(randomAlp4 == randomAlp2){
+                randomAlp4 = Math.floor(0 + (Math.random() *26));
+            }else if(randomAlp4 == randomAlp3){
+                randomAlp4 = Math.floor(0 + (Math.random() *26));
             }
-        }
-        console.log(randomAlp1);
-        console.log(randomAlp2);
-        console.log(randomAlp3);
+    }
         
-        this['char'+randomAlp1].body.gravity.y = 50 + (Math.random() *80);
-        this['char'+randomAlp2].body.gravity.y = 50 + (Math.random() *80);
-        this['char'+randomAlp3].body.gravity.y = 50 + (Math.random() *80);
+//        console.log(randomAlp1);
+//        console.log(randomAlp2);
+//        console.log(randomAlp3);
         
-        
-        
-        
+        game.global['char'+randomAlp1].body.gravity.y = 50 + (Math.random() *80);
+        game.global['char'+randomAlp2].body.gravity.y = 50 + (Math.random() *80);
+        game.global['char'+randomAlp3].body.gravity.y = 50 + (Math.random() *80);
+        game.global['char'+randomAlp4].body.gravity.y = 50 + (Math.random() *80);
         
         
         
@@ -99,7 +108,7 @@ var playState = {
         
         
 
-        
+        game.global.wordArray = ['A', 'B', 'C', 'D', 'E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'];
         
         },
     
@@ -110,14 +119,45 @@ var playState = {
         game.physics.arcade.collide(this.player, this.ground);
         game.physics.arcade.collide(this.player, this.wall1);
         game.physics.arcade.collide(this.player, this.wall2);
-//      game.physics.arcade.collide(this.ground, this.alphabet);
+        game.physics.arcade.collide(this.ground, this.alphabet, this.reAlphabet);
+        game.physics.arcade.overlap(this.player, this.alphabet, this.collectAlphabet);
 //        this.moveBackground();
         this.movePlayer();
         
-        if(!this.player.inWorld){
-            this.playerDie();
-        }
+        
+//        if(!this.player.inWorld){
+//            this.playerDie();
+//        }
     
+    },
+    
+    reAlphabet: function(myGround, myAlphabet){
+//        setTimeout(function(){ 
+            
+            myAlphabet.y = -40;
+            myAlphabet.body.allowGravity = false;
+            myAlphabet.body.velocity.y = 0;
+        
+            var randomAlp1 = Math.floor(0 + (Math.random() *26));
+            game.global['char'+randomAlp1].body.gravity.y = 50 + (Math.random() *80);
+            game.global['char'+randomAlp1].body.velocity.y = 100;
+        
+//        }, 100);
+        
+        
+    },
+    
+    collectAlphabet: function(myPlayer, myAlphabet) {
+//        myAplhabet.kill();  
+        console.log(game.global.wordArray[myAlphabet.name]);
+        
+        myAlphabet.y = -40;
+        myAlphabet.body.allowGravity = false;
+        myAlphabet.body.velocity.y = 0;
+        
+        var randomAlp1 = Math.floor(0 + (Math.random() *26));
+        game.global['char'+randomAlp1].body.gravity.y = 50 + (Math.random() *80);
+        game.global['char'+randomAlp1].body.velocity.y = 100;
     },
     
     playerDie: function() {

@@ -25,8 +25,25 @@ var menuState = {
         var rightKey = game.input.keyboard.addKey(Phaser.Keyboard.RIGHT);
         rightKey.onDown.add(this.start, this);
         
+//        this.reAlphabet();
         
     },
+    
+//     reAlphabet: function(myGround, myAlphabet){
+//        setTimeout(function(){ 
+//            
+//            myAlphabet.y = -40;
+//            myAlphabet.body.allowGravity = false;
+//            myAlphabet.body.velocity.y = 0;
+//        
+//            var randomAlp1 = Math.floor(0 + (Math.random() *26));
+//            game.global['char'+randomAlp1].body.gravity.y = 50 + (Math.random() *80);
+//            game.global['char'+randomAlp1].body.velocity.y = 100;
+//        
+//        }, 1000);
+//        
+//        
+//    },
     
     start: function() {
         game.state.start('play');
