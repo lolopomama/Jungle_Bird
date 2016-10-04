@@ -1,4 +1,4 @@
-var game = new Phaser.Game(360, 640, Phaser.AUTO, 'gameDiv');
+var game = new Phaser.Game(800, 400, Phaser.AUTO, 'gameDiv');
 
 //define global var
 

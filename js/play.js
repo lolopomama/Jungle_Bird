@@ -3,7 +3,7 @@ var playState = {
     create: function(){
         
         //Add background
-        tilesprite = game.add.tileSprite(0, 0, 360, 640, 'skyfield1');
+        tilesprite = game.add.tileSprite(0, 0, 800, 400, 'skyfield1');
         
         this.music = game.add.audio('bgSong');
         this.music.loop = true;
@@ -29,17 +29,56 @@ var playState = {
         // Display the score
         this.scoreLabel = game.add.text(30, 30, 'score: 0',{ font: '18px Arial', fill: '#ffffff' });
         
+        
         //Add Alphabet
+//        this.alphabet = game.add.group();
+//        this.alphabet.enableBody = true;
+//        this.alphabet.createMultiple(10, 'alphabet');
+//        game.time.events.loop(2200, this.addAlphabet, this);
+        
         this.alphabet = game.add.group();
+        var myFrame = 30;
+        for(var i=0; i<26;i++){
+            this['char'+i] = game.add.sprite(i*myFrame,-30, 'alphabet', i, this.alphabet);  
+            game.physics.arcade.enable(this['char'+i]);
+//            this['char'+i].body.gravity.y = 100 + (Math.random() *500);
+//            this['char'+i].body.velocity.x = 100 * game.rnd.pick([-1, 1]);
+        }
         this.alphabet.enableBody = true;
-        this.alphabet.createMultiple(10, 'alphabet');
-        game.time.events.loop(2200, this.addAlphabet, this);
+        
+        
+        var randomAlp1 = Math.floor(0 + (Math.random() *26));
+        var randomAlp2 = Math.floor(0 + (Math.random() *26));
+        var randomAlp3 = Math.floor(0 + (Math.random() *26));
+        
+        while(randomAlp1 == randomAlp2 || randomAlp1 == randomAlp3 || randomAlp2 == randomAlp3){
+            if(randomAlp1 == randomAlp2) {
+                randomAlp1 = Math.floor(0 + (Math.random() *26));
+            }else if(randomAlp1 == randomAlp3) {
+                randomAlp1 = Math.floor(0 + (Math.random() *26));
+            }else if(randomAlp2 == randomAlp3) {
+                randomAlp2 = Math.floor(0 + (Math.random() *26));
+            }
+        }
+        console.log(randomAlp1);
+        console.log(randomAlp2);
+        console.log(randomAlp3);
+        
+        this['char'+randomAlp1].body.gravity.y = 50 + (Math.random() *200);
+        this['char'+randomAlp2].body.gravity.y = 50 + (Math.random() *200);
+        this['char'+randomAlp3].body.gravity.y = 50 + (Math.random() *200);
+        
+        
+        game.physics.arcade.collide(this.ground, this.alphabet);
+        
+        
+        
         
         // Initialize the score variable
         this.score = 0;
         
-        this.ground = game.add.sprite(0, 515 ,'ground');
-        this.ground.scale.setTo(2, 1);
+        this.ground = game.add.sprite(0, 300 ,'ground');
+        this.ground.scale.setTo(4, 1);
         this.ground.anchor.setTo(0, 0);
         game.physics.arcade.enable(this.ground);
         this.ground.body.immovable = true;
@@ -51,13 +90,15 @@ var playState = {
         this.wall1.body.immovable = true;
         this.wall1.alpha = 0.5;
         
-        this.wall2 = game.add.sprite( 350, 0, 'wall');
+        this.wall2 = game.add.sprite( 790 , 0, 'wall');
         this.wall2.scale.setTo(1,2);
         game.physics.arcade.enable(this.wall2);
         this.wall2.body.immovable = true;
         this.wall2.alpha = 0.5;
         
         game.physics.arcade.collide(this.player, this.wall1, this.wall2);
+        
+//        this.a = game.add.
         
         
         },
@@ -139,6 +180,12 @@ var playState = {
             alp.body.bounce.x = 1;
             alp.checkWorldBounds = true;
             alp.outOfBoundsKill = true;
+        },
+    
+    word: function() {
+        
+        var word = ["bubble", "squid", "apple", "green", "phone"];
+        
         },
     
 }
