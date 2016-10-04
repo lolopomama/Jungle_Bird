@@ -1,7 +1,9 @@
+var self;
 var playState = {
     
     create: function(){
         
+        self = this;
         //Add background
         tilesprite = game.add.tileSprite(0, 0, 800, 400, 'skyfield1');
         
@@ -27,8 +29,8 @@ var playState = {
         this.cursor = game.input.keyboard.createCursorKeys();
         
         // Display the score
-        this.scoreLabel = game.add.text(30, 30, 'score: 0',{ font: '18px Arial', fill: '#ffffff' });
-        
+        game.global.lifeLabel = game.add.text(30, 30, 'Life: 3',{ font: '18px Arial', fill: '#ffffff' });
+        game.global.life = 3;
         
         //Add Alphabet
 //        this.alphabet = game.add.group();
@@ -83,8 +85,7 @@ var playState = {
         
         
         
-        // Initialize the score variable
-        this.score = 0;
+        
         
         this.ground = game.add.sprite(0, 360 ,'ground');
         this.ground.scale.setTo(4, 1);
@@ -110,6 +111,28 @@ var playState = {
 
         game.global.wordArray = ['A', 'B', 'C', 'D', 'E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'];
         
+        game.global.word = ["bubble", "squid", "apple", "green", "phone", "water", "computer", "math"];
+        var r = Math.floor(Math.random()* game.global.word.length);
+        
+        //เอามาเชื่อมกันนะเออ 
+        //pick one of the word from array ,using global because we cannot spcify this. in function anymore <3
+        
+        game.global.currentWord = game.global.word[r].toUpperCase();
+        game.global.word.splice(r, 1);
+        
+        console.log(game.global.currentWord);
+        console.log(game.global.word);
+        
+        
+        this.wordLabel = game.add.text(game.width/2, 360, game.global.currentWord,{ font: '20px Arial', fill: '#ffffff' });
+        this.wordLabel.anchor.setTo(0,0 );
+        
+        game.global.currentPosition = 0;
+        
+        //change color after we pick the right alphabet
+        
+        this.getWordLabel = game.add.text(game.width/2, 360, "",{ font: '20px Arial', fill: '#000000' });
+        this.getWordLabel.anchor.setTo(0,0 );
         },
     
         
@@ -148,7 +171,25 @@ var playState = {
     },
     
     collectAlphabet: function(myPlayer, myAlphabet) {
-//        myAplhabet.kill();  
+        //does word are = currnt postion in our word ไหม
+        if(game.global.wordArray[myAlphabet.name] == game.global.currentWord[game.global.currentPosition]){
+            
+            
+            self.getWordLabel.setText(self.getWordLabel.text + game.global.currentWord[game.global.currentPosition] );
+            game.global.currentPosition++;
+        }
+        
+        else{
+            game.global.life--;
+            
+            if(game.global.life <= 0){
+                self.playerDie();
+            }else {
+                game.global.lifeLabel.setText("Life: " + game.global.life);
+            }
+        }
+        
+        
         console.log(game.global.wordArray[myAlphabet.name]);
         
         myAlphabet.y = -40;
@@ -225,10 +266,7 @@ var playState = {
             alp.outOfBoundsKill = true;
         },
     
-    word: function() {
+    
         
-        var word = ["bubble", "squid", "apple", "green", "phone"];
-        
-        },
     
 }
