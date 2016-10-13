@@ -3,6 +3,9 @@ var menuState = {
     create: function(){
         game.add.image(0,0 , 'skyfield1');
         
+        this.helloSound = game.add.audio('helloSound');
+        this.helloSound.play();
+        
         var nameLabel = game.add.text(game.width/2, -100, 'Jungle Bird', {font: '40px Arial', fill: '#ffffff' });
         nameLabel.anchor.setTo(0.5, 0.5);
         

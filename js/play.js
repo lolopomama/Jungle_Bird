@@ -5,8 +5,7 @@ var playState = {
         
         self = this;
         //Add background
-        tilesprite = game.add.tileSprite(0, 0, 800, 400, 'skyfield1');
-        
+        game.add.image(0,0 , 'skyfield1');
         this.music = game.add.audio('bgSong');
         this.music.loop = true;
         this.music.play();
@@ -14,6 +13,9 @@ var playState = {
         this.dieSound = game.add.audio('dieSound');
         this.coinSound = game.add.audio('coinSound');
         this.jumpSound = game.add.audio('jumpSound');
+        
+        game.global.getSound = game.add.audio('collectAlp');
+        game.global.getWrongSound = game.add.audio('collectWrongAlp');
         //Add player
         
         this.player = game.add.sprite(game.width/2, 320 ,'player');
@@ -174,9 +176,8 @@ var playState = {
         //does word are = currnt postion in our word ไหม
         if(game.global.wordArray[myAlphabet.name] == game.global.currentWord[game.global.currentPosition]){
             
-            
             self.getWordLabel.setText(self.getWordLabel.text + game.global.currentWord[game.global.currentPosition] );
-            game.global.currentPosition++;
+            game.global.getSound.play();
         }
         
         else{
@@ -186,6 +187,7 @@ var playState = {
                 self.playerDie();
             }else {
                 game.global.lifeLabel.setText("Life: " + game.global.life);
+                game.global.getWrongSound.play();
             }
         }
         

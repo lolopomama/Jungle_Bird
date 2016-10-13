@@ -25,8 +25,12 @@ var loadState = {
     game.load.audio('dieSound', ['assets/die.wav']);
     game.load.audio('coinSound', ['assets/coin.wav']);
     game.load.audio('jumpSound', ['assets/jump.wav']);
-
-
+        
+    game.load.audio('helloSound', ['assets/startSound.wav']);
+    game.load.audio('congrat', ['assets/Congratulaton.wav']);
+        
+    game.load.audio('collectAlp', ['assets/collectAlp.wav']);
+    game.load.audio('collectWrongAlp', ['assets/collectWrongAlp.wav']);
     //Tile MAP resource
     
     game.load.image('terrain', 'Tile_resource/terrain.png');
