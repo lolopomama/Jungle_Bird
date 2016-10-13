@@ -6,7 +6,7 @@ var menuState = {
         this.helloSound = game.add.audio('helloSound');
         this.helloSound.play();
         
-        var nameLabel = game.add.text(game.width/2, -100, 'Jungle Bird', {font: '40px Arial', fill: '#ffffff' });
+        var nameLabel = game.add.text(game.width/2, -100, 'Jungle Bird', {font: '70px Lobster', fill: '#F5450C' });
         nameLabel.anchor.setTo(0.5, 0.5);
         
         game.add.tween(nameLabel).to({y: 80}, 1500).easing(Phaser.Easing.Bounce.Out).start();

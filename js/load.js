@@ -13,13 +13,11 @@ var loadState = {
 
 
     game.load.image('skyfield1', 'assets/background.png');
-    game.load.image('skyfield2', 'assets/wall2.jpg');
-    game.load.image('skyfield3', 'assets/wall3.png');
-    game.load.image('skyfield4', 'assets/wall4.jpg');
     game.load.spritesheet('player', 'assets/player2.png', 40 ,40 );
     game.load.image('ground', 'assets/wallHorizontal.png');
     game.load.image('wall', 'assets/wallVertical.png');
     game.load.spritesheet('alphabet', 'assets/alphabet.png', 30,30);
+    game.load.image('dieWallpaper', 'assets/dieBlackground.png');
 
     game.load.audio('bgSong', [ 'assets/music.mp3']);
     game.load.audio('dieSound', ['assets/die.wav']);
@@ -27,7 +25,7 @@ var loadState = {
     game.load.audio('jumpSound', ['assets/jump.wav']);
         
     game.load.audio('helloSound', ['assets/startSound.wav']);
-    game.load.audio('congrat', ['assets/Congratulaton.wav']);
+    game.load.audio('congrat', ['assets/congratulaton.wav']);
         
     game.load.audio('collectAlp', ['assets/collectAlp.wav']);
     game.load.audio('collectWrongAlp', ['assets/collectWrongAlp.wav']);
