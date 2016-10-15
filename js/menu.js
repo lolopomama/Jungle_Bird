@@ -11,8 +11,18 @@ var menuState = {
         
         game.add.tween(nameLabel).to({y: 80}, 1500).easing(Phaser.Easing.Bounce.Out).start();
         
-        var goLabel = game.add.text(game.width/2, 300, 'Press left or right for new adventure', {font: '30px Lobster', fill: '#CD5C5C ' });
+        var goL;
+                if (game.device.desktop) {
+                    goL = 'Press left or right for new adventure';
+                }
+                else {
+                    goL = 'Touch the screen to start';
+                }
+        
+        var goLabel = game.add.text(game.width/2, 300, goL, {font: '30px Lobster', fill: '#CD5C5C ' });
         goLabel.anchor.setTo(0.5, 0.5);
+        
+            
         
         //Add Frenzy and wave motion
         var frenzyLable = game.add.text(530, 120, 'FRENZY', {font: '30px Lobster', fill: '#FFD700' });
@@ -24,6 +34,9 @@ var menuState = {
         
         
         //Letting game start
+        if (!game.device.desktop) {
+            game.input.onDown.add(this.start, this);
+            }
         var leftKey = game.input.keyboard.addKey(Phaser.Keyboard.LEFT);
         leftKey.onDown.add(this.start, this);
         
