@@ -30,6 +30,10 @@ var loadState = {
         
     game.load.audio('collectAlp', ['assets/collectAlp.wav']);
     game.load.audio('collectWrongAlp', ['assets/collectWrongAlp.wav']);
+        
+    game.load.image('jumpButton', 'assets/jumpButton.png');
+    game.load.image('rightButton', 'assets/rightButton.png');
+    game.load.image('leftButton', 'assets/leftButton.png');
     //Tile MAP resource
     
     game.load.image('terrain', 'Tile_resource/terrain.png');

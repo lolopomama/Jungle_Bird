@@ -10,6 +10,10 @@ var playState = {
         this.music.loop = true;
         this.music.play();
         
+        if (!game.device.desktop) {
+            this.addMobileInputs();
+        }
+        
         this.dieSound = game.add.audio('dieSound');
         this.coinSound = game.add.audio('coinSound');
         this.jumpSound = game.add.audio('jumpSound');
@@ -232,6 +236,62 @@ var playState = {
         
     },
     
+    addMobileInputs: function() {
+
+            var jumpButton = game.add.sprite(650, 300, 'jumpButton');
+            jumpButton.inputEnabled = true;
+            jumpButton.alpha = 0.5;
+            jumpButton.events.onInputDown.add(this.jumpPlayer, this);
+        
+        // Movement variables
+            this.moveLeft = false;
+            this.moveRight = false;
+
+            var leftButton = game.add.sprite(50, 300, 'leftButton');
+            leftButton.inputEnabled = true;
+            leftButton.alpha = 0.5;
+            leftButton.events.onInputOver.add(this.setLeftTrue, this);
+            leftButton.events.onInputOut.add(this.setLeftFalse, this);
+            leftButton.events.onInputDown.add(this.setLeftTrue, this);
+            leftButton.events.onInputUp.add(this.setLeftFalse, this);
+
+            var rightButton = game.add.sprite(130, 300, 'rightButton');
+            rightButton.inputEnabled = true;
+            rightButton.alpha = 0.5;
+            rightButton.events.onInputOver.add(this.setRightTrue, this);
+            rightButton.events.onInputOut.add(this.setRightFalse, this);
+            rightButton.events.onInputDown.add(this.setRightTrue, this);
+            rightButton.events.onInputUp.add(this.setRightFalse, this);
+        
+            
+    },
+    
+    jumpPlayer: function() {
+
+        if (this.player.body.touching.down) {
+
+            this.player.body.velocity.y = -320;
+            this.jumpSound.play();
+        }
+    },
+    
+    setLeftTrue: function() {
+            this.moveLeft = true;
+    },
+    
+    setLeftFalse: function() {
+            this.moveLeft = false;
+    },
+    
+    setRightTrue: function() {
+            this.moveRight = true;
+    },
+    
+    setRightFalse: function() {
+            this.moveRight = false;
+    },
+
+    
 //    moveBackground: function(){
 //              if (this.cursor.left.isDown)    {
 //            tilesprite.tilePosition.x += 1;
@@ -258,12 +318,12 @@ var playState = {
     
     movePlayer: function() {
 
-			if (this.cursor.left.isDown) {
+			if (this.cursor.left.isDown || this.moveLeft) {
 				this.player.body.velocity.x = -300;
                 this.player.animations.play('left'); //Left animation
 			}
 
-			else if (this.cursor.right.isDown) {
+			else if (this.cursor.right.isDown || this.moveRight) {
 				this.player.body.velocity.x = 300;
                 this.player.animations.play('right'); //Right animation
 			}
@@ -275,11 +335,17 @@ var playState = {
 			}
 
 			if (this.cursor.up.isDown && this.player.body.touching.down){
-				this.player.body.velocity.y = -320;
+				this.jumpPlayer();
+                this.player.body.velocity.y = -320;
                 this.player.animations.play('top');
                 this.jumpSound.play();
-                
 			}
+            
+            if (game.input.totalActivePointers == 0) {
+
+                this.moveLeft = false;
+                this.moveRight = false;
+            }
         },
         
     addAlphabet: function() {
