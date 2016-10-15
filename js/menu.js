@@ -11,15 +11,15 @@ var menuState = {
         
         game.add.tween(nameLabel).to({y: 80}, 1500).easing(Phaser.Easing.Bounce.Out).start();
         
-        var goLabel = game.add.text(game.width/2, 300, 'Press left or right for new adventure', {font: '30px Lobster', fill: '#F5450C' });
+        var goLabel = game.add.text(game.width/2, 300, 'Press left or right for new adventure', {font: '30px Lobster', fill: '#CD5C5C ' });
         goLabel.anchor.setTo(0.5, 0.5);
         
         //Add Frenzy and wave motion
-        var frenzyLable = game.add.text(game.width/2, -200, 'FRENZY', {font: '30px Arial', fill: '#ffffff' });
+        var frenzyLable = game.add.text(530, 120, 'FRENZY', {font: '30px Lobster', fill: '#FFD700' });
         
         frenzyLable.anchor.setTo(0.5, 0.5);
         
-        game.add.tween(frenzyLable).to({angle: -2}, 500).to({angle: 2 }, 1000 ).to({angle:0}, 500).loop().start();
+        game.add.tween(frenzyLable).to({angle: -4}, 100).to({angle: 4 }, 1000 ).to({angle:0}, 100).loop().start();
         
         
         

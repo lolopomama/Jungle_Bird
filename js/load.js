@@ -18,6 +18,7 @@ var loadState = {
     game.load.image('wall', 'assets/wallVertical.png');
     game.load.spritesheet('alphabet', 'assets/alphabet.png', 30,30);
     game.load.image('dieWallpaper', 'assets/dieBlackground.png');
+    game.load.image('winWallpaper', 'assets/winBlackground.png');
 
     game.load.audio('bgSong', [ 'assets/music.mp3']);
     game.load.audio('dieSound', ['assets/die.wav']);

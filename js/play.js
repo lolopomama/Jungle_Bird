@@ -31,7 +31,7 @@ var playState = {
         this.cursor = game.input.keyboard.createCursorKeys();
         
         // Display the score
-        game.global.lifeLabel = game.add.text(700, 30, 'Life: 3',{ font: '25px Lobster', fill: '#ffffff' });
+        game.global.lifeLabel = game.add.text(700, 30, 'Life: 3',{ font: '25px Lobster', fill: '#00FFFF' });
         game.global.life = 3;
         
         //Add Alphabet
@@ -121,7 +121,7 @@ var playState = {
 
         game.global.wordArray = ['A', 'B', 'C', 'D', 'E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'];
         
-        game.global.word = ['PIG','RAT','BAT'];
+        game.global.word = ['PI','RA','BD'];
         var r = Math.floor(Math.random()* game.global.word.length);
         
         //เอามาเชื่อมกันนะเออ 
@@ -145,7 +145,7 @@ var playState = {
         
         this.getWordLabel = game.add.text(game.width/2, 340, "",{ font: '35px Oswald', fill: '#BA55D3' });
         this.getWordLabel.anchor.setTo(0,0 );
-        this.collectedWord = "";
+//        this.collectedWord = "";
         },
     
         
@@ -185,6 +185,9 @@ var playState = {
     
     collectAlphabet: function(myPlayer, myAlphabet) {
         //does word are = currnt postion in our word ไหม
+        
+        
+        
         if(game.global.wordArray[myAlphabet.name] == game.global.currentWord[game.global.currentPosition]){
             
             self.getWordLabel.setText(self.getWordLabel.text + game.global.currentWord[game.global.currentPosition] );
@@ -194,7 +197,6 @@ var playState = {
             game.global.getSound.play();
 //            console.log("hey = "+self.collectedWord );
 //            self.NextWord();
-            
                 
         }
         
