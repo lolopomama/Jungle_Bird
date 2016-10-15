@@ -136,14 +136,14 @@ var playState = {
         console.log(game.global.word);
         
         
-        this.wordLabel = game.add.text(game.width/2, 360, game.global.currentWord,{ font: '20px Arial', fill: '#ffffff' });
+        this.wordLabel = game.add.text(game.width/2, 340, game.global.currentWord,{ font: '35px Oswald', fill: '#9ACD32' });
         this.wordLabel.anchor.setTo(0,0 );
         
         game.global.currentPosition = 0;
         
         //change color after we pick the right alphabet
         
-        this.getWordLabel = game.add.text(game.width/2, 360, "",{ font: '20px Arial', fill: '#000000' });
+        this.getWordLabel = game.add.text(game.width/2, 340, "",{ font: '35px Oswald', fill: '#BA55D3' });
         this.getWordLabel.anchor.setTo(0,0 );
         this.collectedWord = "";
         },
