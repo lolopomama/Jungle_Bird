@@ -11,9 +11,11 @@ var menuState = {
         
         game.add.tween(nameLabel).to({y: 80}, 1500).easing(Phaser.Easing.Bounce.Out).start();
         
+        var goLabel = game.add.text(game.width/2, 300, 'Press left or right for new adventure', {font: '30px Lobster', fill: '#F5450C' });
+        goLabel.anchor.setTo(0.5, 0.5);
         
         //Add Frenzy and wave motion
-        var frenzyLable = game.add.text(game.width/2, game.height-500, 'FRENZY', {font: '30px Arial', fill: '#ffffff' });
+        var frenzyLable = game.add.text(game.width/2, -200, 'FRENZY', {font: '30px Arial', fill: '#ffffff' });
         
         frenzyLable.anchor.setTo(0.5, 0.5);
         
@@ -28,7 +30,7 @@ var menuState = {
         var rightKey = game.input.keyboard.addKey(Phaser.Keyboard.RIGHT);
         rightKey.onDown.add(this.start, this);
         
-//        this.reAlphabet();
+        
         
     },
     

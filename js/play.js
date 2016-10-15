@@ -31,7 +31,7 @@ var playState = {
         this.cursor = game.input.keyboard.createCursorKeys();
         
         // Display the score
-        game.global.lifeLabel = game.add.text(30, 30, 'Life: 3',{ font: '18px Arial', fill: '#ffffff' });
+        game.global.lifeLabel = game.add.text(700, 30, 'Life: 3',{ font: '25px Lobster', fill: '#ffffff' });
         game.global.life = 3;
         
         //Add Alphabet
@@ -57,6 +57,7 @@ var playState = {
         var randomAlp2 = Math.floor(0 + (Math.random() *26));
         var randomAlp3 = Math.floor(0 + (Math.random() *26));
         var randomAlp4 = Math.floor(0 + (Math.random() *26));
+        var randomAlp5 = Math.floor(0 + (Math.random() *26));
         
         
         
@@ -73,6 +74,12 @@ var playState = {
                 randomAlp4 = Math.floor(0 + (Math.random() *26));
             }else if(randomAlp4 == randomAlp3){
                 randomAlp4 = Math.floor(0 + (Math.random() *26));
+            }else if(randomAlp5 == randomAlp1){
+                randomAlp5 = Math.floor(0 + (Math.random() *26));
+            }else if(randomAlp5 == randomAlp2){
+                randomAlp5 = Math.floor(0 + (Math.random() *26));
+            }else if(randomAlp5 == randomAlp3){
+                randomAlp5 = Math.floor(0 + (Math.random() *26));
             }
     }
         
@@ -84,6 +91,7 @@ var playState = {
         game.global['char'+randomAlp2].body.gravity.y = 50 + (Math.random() *80);
         game.global['char'+randomAlp3].body.gravity.y = 50 + (Math.random() *80);
         game.global['char'+randomAlp4].body.gravity.y = 50 + (Math.random() *80);
+        game.global['char'+randomAlp5].body.gravity.y = 50 + (Math.random() *80);
         
         
         
@@ -113,7 +121,7 @@ var playState = {
 
         game.global.wordArray = ['A', 'B', 'C', 'D', 'E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'];
         
-        game.global.word = ["bubble", "squid", "apple", "green", "phone", "water", "computer", "math"];
+        game.global.word = ['PIG','RAT','BAT'];
         var r = Math.floor(Math.random()* game.global.word.length);
         
         //เอามาเชื่อมกันนะเออ 
@@ -121,6 +129,8 @@ var playState = {
         
         game.global.currentWord = game.global.word[r].toUpperCase();
         game.global.word.splice(r, 1);
+        
+        
         
         console.log(game.global.currentWord);
         console.log(game.global.word);
@@ -135,6 +145,7 @@ var playState = {
         
         this.getWordLabel = game.add.text(game.width/2, 360, "",{ font: '20px Arial', fill: '#000000' });
         this.getWordLabel.anchor.setTo(0,0 );
+        this.collectedWord = "";
         },
     
         
@@ -177,7 +188,14 @@ var playState = {
         if(game.global.wordArray[myAlphabet.name] == game.global.currentWord[game.global.currentPosition]){
             
             self.getWordLabel.setText(self.getWordLabel.text + game.global.currentWord[game.global.currentPosition] );
+            game.global.currentPosition++;
+
+//            self.collectedWord += game.global.wordArray[myAlphabet.name];
             game.global.getSound.play();
+//            console.log("hey = "+self.collectedWord );
+//            self.NextWord();
+            
+                
         }
         
         else{
@@ -208,7 +226,7 @@ var playState = {
             this.dieSound.play();
 
         
-            game.state.start('menu');
+            game.state.start('over');
         
     },
     
@@ -224,6 +242,17 @@ var playState = {
 //        
 //    },
     
+    NextWord: function(){
+        if (game.global.currentWord == self.collectedWord ) {
+            console.log("next word.");
+            var r = Math.floor(Math.random()* game.global.word.length);
+            game.global.currentWord = game.global.word[r].toUpperCase();
+            game.global.word.splice(r, 1);
+            self.wordLabel.setText(game.global.currentWord);
+            self.getWordLabel.setText("");
+        }
+        
+    },
     
     movePlayer: function() {
 
