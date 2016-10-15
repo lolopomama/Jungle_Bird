@@ -18,5 +18,36 @@ var overState = {
         
         game.physics.arcade.enable(this.player);
         this.player.body.gravity.y = 400;
+        
+        this.cursor = game.input.keyboard.createCursorKeys();
+        
+        var goL;
+                if (game.device.desktop) {
+                    goL = 'Press up tp play again';
+                }
+                else {
+                    goL = 'Touch the screen to play again';
+                }
+        
+        var goLabel = game.add.text(game.width/2, 300, goL, {font: '30px Lobster', fill: '#FFFFE0 ' });
+        goLabel.anchor.setTo(0.5, 0.5);
+        
+        if (!game.device.desktop) {
+            game.input.onDown.add(this.nextStage, this);
+            }
+        
+    },
+    
+    update: function(){
+        if (this.cursor.up.isDown){
+        this.nextStage();
+        }
+    },
+    
+    nextStage: function() {
+        
+            game.state.start('menu');
+            
+        
     },
 }
