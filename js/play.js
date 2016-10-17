@@ -69,13 +69,13 @@ var playState = {
             if(randomAlp1 == randomAlp2) {
                 randomAlp1 = Math.floor(0 + (Math.random() *26));
             }else if(randomAlp1 == randomAlp3) {
-                randomAlp1 = Math.floor(0 + (Math.random() *26));
+                randomAlp3 = Math.floor(0 + (Math.random() *26));
             }else if(randomAlp2 == randomAlp3) {
                 randomAlp2 = Math.floor(0 + (Math.random() *26));
             }else if(randomAlp4 == randomAlp1){
                 randomAlp4 = Math.floor(0 + (Math.random() *26));
             }else if(randomAlp4 == randomAlp2){
-                randomAlp4 = Math.floor(0 + (Math.random() *26));
+                randomAlp3 = Math.floor(0 + (Math.random() *26));
             }else if(randomAlp4 == randomAlp3){
                 randomAlp4 = Math.floor(0 + (Math.random() *26));
             }else if(randomAlp5 == randomAlp1){
@@ -125,7 +125,7 @@ var playState = {
 
         game.global.wordArray = ['A', 'B', 'C', 'D', 'E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'];
         
-        game.global.word = ['PI','RA','BD'];
+        game.global.word = ['BIRD','ANT','CAT','PIE','APPLE'];
         var r = Math.floor(Math.random()* game.global.word.length);
         
         //เอามาเชื่อมกันนะเออ 
@@ -163,7 +163,7 @@ var playState = {
         game.physics.arcade.overlap(this.player, this.alphabet, this.collectAlphabet);
 //        this.moveBackground();
         this.movePlayer();
-        
+        this.nextWin();
         
 //        if(!this.player.inWorld){
 //            this.playerDie();
@@ -171,11 +171,18 @@ var playState = {
     
     },
     
+    nextWin: function(){
+            if(game.global.currentPosition == game.global.currentWord.length){
+                this.music.stop();
+                game.state.start('win');
+            }
+    },
+    
     reAlphabet: function(myGround, myAlphabet){
 //        setTimeout(function(){ 
             
             myAlphabet.y = -40;
-            myAlphabet.body.allowGravity = false;
+//            myAlphabet.body.allowGravity = false;
             myAlphabet.body.velocity.y = 0;
         
             var randomAlp1 = Math.floor(0 + (Math.random() *26));

@@ -23,13 +23,13 @@ var overState = {
         
         var goL;
                 if (game.device.desktop) {
-                    goL = 'Press up tp play again';
+                    goL = 'Press up to play again';
                 }
                 else {
                     goL = 'Touch the screen to play again';
                 }
         
-        var goLabel = game.add.text(game.width/2, 300, goL, {font: '30px Lobster', fill: '#FFFFE0 ' });
+        var goLabel = game.add.text(game.width/2, 300, goL, {font: '45px Lobster', fill: '#FFFFE0 ' });
         goLabel.anchor.setTo(0.5, 0.5);
         
         if (!game.device.desktop) {
